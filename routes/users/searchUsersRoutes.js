@@ -1,11 +1,11 @@
-const Router = require("express").Router()
+const Router = require('express').Router();
 
-const controller = require('../../controllers/users/searchUserController')
+const controller = require('../../controllers/users/searchUserController');
 
 // get users
-Router.get('/users', controller.getUsers)
+Router.get('/users', controller.getUsers);
 
 // find users
-Router.get('/users/find/name', controller.findUsersName)
+Router.get('/users/find/name', controller.findUsersName);
 
-module.exports = Router
+module.exports = Router;

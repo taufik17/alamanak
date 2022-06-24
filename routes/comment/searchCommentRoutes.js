@@ -1,11 +1,11 @@
-const Router = require("express").Router()
+const Router = require('express').Router();
 
-const controller = require('../../controllers/comment/searchCommentController')
+const controller = require('../../controllers/comment/searchCommentController');
 
 // get all comment
-Router.get('/comment', controller.getAllComment)
+Router.get('/comment', controller.getAllComment);
 
 // find comment by recipe
-Router.get('/comment/find/id_recipe', controller.findCommentRecipe)
+Router.get('/comment/find/id_recipe', controller.findCommentRecipe);
 
-module.exports = Router
+module.exports = Router;
