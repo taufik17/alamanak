@@ -30,7 +30,7 @@ const getLatestRecipe = () => new Promise((resolve, reject) => {
 
 // get recipe by name recipe
 const getByName = (name) => new Promise((resolve, reject) => {
-  db.query('SELECT * FROM recipe WHERE recipe_name LIKE $1', [`%${name}%`], (error, results) => {
+  db.query('SELECT * FROM recipe WHERE LOWER(recipe_name) LIKE LOWER($1)', [`%${name}%`], (error, results) => {
     if (error) {
       reject(error);
     } else {

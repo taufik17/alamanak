@@ -4,18 +4,27 @@ const modelSearch = require('../../model/users/searchUserModel');
 const registerUser = async (req, res) => {
   try {
     const {
-      username, password, name, email, phone, user_image,
+      username, password, name, email, phone, userImage = 'default.jpg',
     } = req.body;
-    const addUser = await model.addUser({ username, password });
-    const user_id = addUser.rows[0]?.id_user;
-    const addProfile = await model.addProfile({
-      name, email, phone, user_image, user_id,
-    });
-
-    if (addProfile) {
-      res.send('data berhasil ditambah');
+    let message = '';
+    const checkUsername = await modelSearch.getProfileUsername(username);
+    const checkUserEmail = await modelSearch.getProfileMail(email);
+    if (checkUsername.rowCount > 0) message += 'username, ';
+    if (checkUserEmail.rowCount > 0) message += 'email, ';
+    if ((checkUsername.rowCount || checkUserEmail.rowCount) > 0) {
+      res.status(400).send(`${message}is already registred`);
     } else {
-      res.status(400).send('data gagal ditambah');
+      const addUser = await model.addUser({ username, password });
+      const userId = addUser.rows[0]?.id_user;
+      const addProfile = await model.addProfile({
+        name, email, phone, userImage, userId,
+      });
+
+      if (addProfile) {
+        res.send('data berhasil ditambah');
+      } else {
+        res.status(400).send('data gagal ditambah');
+      }
     }
   } catch (error) {
     res.status(400).send('ada yang error');

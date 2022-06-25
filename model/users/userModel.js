@@ -17,7 +17,7 @@ const addUser = (props) => new Promise((resolve, reject) => {
 const addProfile = (props) => new Promise((resolve, reject) => {
   db.query(
     'INSERT INTO profile (name, email, phone, user_image, id_user) VALUES ($1, $2, $3, $4, $5)',
-    [props.name, props.email, props.phone, props.user_image, props.user_id],
+    [props.name, props.email, props.phone, props.userImage, props.userId],
     (error, results) => {
       if (error) {
         reject(error);
