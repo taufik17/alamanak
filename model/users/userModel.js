@@ -28,7 +28,7 @@ const addProfile = (props) => new Promise((resolve, reject) => {
   );
 });
 
-const editUser = (props) => new Promise((resolve, reject) => {
+const doEditUser = (props) => new Promise((resolve, reject) => {
   db.query(
     'UPDATE users SET username = $1, password = $2 WHERE id_user = $3',
     [props.inputUsername, props.inputPassword, props.id_user],
@@ -42,7 +42,7 @@ const editUser = (props) => new Promise((resolve, reject) => {
   );
 });
 
-const editProfil = (props) => new Promise((resolve, reject) => {
+const doEditProfil = (props) => new Promise((resolve, reject) => {
   db.query(
     'UPDATE profile SET name = $1, email = $2, phone = $3, user_image = $4 WHERE id_user = $5',
     [props.inputName, props.inputEmail, props.inputPhone, props.inputUserImage, props.id_user],
@@ -56,7 +56,7 @@ const editProfil = (props) => new Promise((resolve, reject) => {
   );
 });
 
-const deleteUser = (id) => new Promise((resolve, reject) => {
+const doDeleteUser = (id) => new Promise((resolve, reject) => {
   db.query(
     'DELETE FROM users WHERE id_user = $1',
     [id],
@@ -71,5 +71,5 @@ const deleteUser = (id) => new Promise((resolve, reject) => {
 });
 
 module.exports = {
-  addUser, addProfile, editUser, editProfil, deleteUser,
+  addUser, addProfile, doEditUser, doEditProfil, doDeleteUser,
 };

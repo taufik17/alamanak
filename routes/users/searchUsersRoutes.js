@@ -2,7 +2,7 @@ const Router = require('express').Router();
 
 const controller = require('../../controllers/users/searchUserController');
 
-// get users
+// get users profile
 Router.get('/users', controller.getUsers);
 
 // find users

@@ -1,8 +1,9 @@
 const db = require('../../db');
 
-const getAllUser = () => new Promise((resolve, reject) => {
+const getAllUser = (props) => new Promise((resolve, reject) => {
   db.query(
-    'SELECT * FROM profile ORDER BY profile.id_profile ASC',
+    `SELECT * FROM profile ORDER BY profile.id_profile ${props.validOrder} LIMIT $1 OFFSET $2`,
+    [props.perPage, props.offSet],
     (error, results) => {
       if (error) {
         reject(error);
@@ -14,13 +15,17 @@ const getAllUser = () => new Promise((resolve, reject) => {
 });
 
 const getByName = (name) => new Promise((resolve, reject) => {
-  db.query('SELECT * FROM profile WHERE LOWER(name) LIKE LOWER($1)', [`%${name}%`], (error, results) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(results);
-    }
-  });
+  db.query(
+    'SELECT * FROM profile WHERE LOWER(name) LIKE LOWER($1)',
+    [`%${name}%`],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
 });
 
 const getByID = (id) => new Promise((resolve, reject) => {
@@ -34,7 +39,7 @@ const getByID = (id) => new Promise((resolve, reject) => {
 });
 
 const getProfileMail = (email) => new Promise((resolve, reject) => {
-  db.query(`SELECT username, email 
+  db.query(`SELECT username, email, password
             FROM users 
             INNER JOIN profile 
             ON users.id_user = profile.id_user 
