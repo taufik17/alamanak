@@ -3,6 +3,9 @@ const verifyToken = require('../../middleware/verifyToken');
 const midUser = require('../../middleware/user');
 const controller = require('../../controllers/users/userController');
 
+// My Profile
+Router.post('/users/myprofile', verifyToken.checkToken, controller.myProfile);
+
 // create / register user
 Router.post('/users/add', midUser.checkUser, verifyToken.checkToken, controller.registerUser);
 

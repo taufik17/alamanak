@@ -39,7 +39,7 @@ const getByID = (id) => new Promise((resolve, reject) => {
 });
 
 const getProfileMail = (email) => new Promise((resolve, reject) => {
-  db.query(`SELECT username, email, password
+  db.query(`SELECT username, email, password, users.id_user AS id_user
             FROM users 
             INNER JOIN profile 
             ON users.id_user = profile.id_user 

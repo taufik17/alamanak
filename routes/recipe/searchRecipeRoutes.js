@@ -1,5 +1,5 @@
 const Router = require('express').Router();
-
+const verifyToken = require('../../middleware/verifyToken');
 const controller = require('../../controllers/recipe/searchRecipeController');
 
 // get recipe
@@ -16,5 +16,8 @@ Router.get('/recipe/video/id_recipe', controller.getStepVideo);
 
 // get latest recipe
 Router.get('/recipe/find/latest', controller.getLatestRecipe);
+
+// get my recip
+Router.get('/recipe/find/myrecipe', verifyToken.checkToken, controller.findMyRecipe);
 
 module.exports = Router;

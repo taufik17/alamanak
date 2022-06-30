@@ -25,7 +25,19 @@ const getCommentRecipe = (id) => new Promise((resolve, reject) => {
   });
 });
 
+// get comment by id comment
+const getCommentById = (id) => new Promise((resolve, reject) => {
+  db.query('SELECT * FROM comment WHERE id_comment = $1', [id], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
 module.exports = {
   getAllComment,
   getCommentRecipe,
+  getCommentById,
 };

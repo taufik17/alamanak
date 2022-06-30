@@ -23,6 +23,20 @@ const findRecipeName = async (req, res) => {
   }
 };
 
+const findMyRecipe = async (req, res) => {
+  try {
+    const idUser = req.res.locals;
+    const getData = await model.getByUser(idUser);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const findRecipeUser = async (req, res) => {
   try {
     const { id } = req.body;
@@ -66,4 +80,5 @@ module.exports = {
   getStepVideo,
   findRecipeUser,
   getLatestRecipe,
+  findMyRecipe,
 };

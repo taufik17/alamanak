@@ -6,6 +6,7 @@ const checkToken = async (req, res, next) => {
     const token = req.headers?.authorization;
     const decoded = jwt.verify(token?.substring(7, token?.length), process.env.SECRET_KEY);
     if (decoded) {
+      res.locals = decoded.id_user;
       next();
     }
   } catch (error) {

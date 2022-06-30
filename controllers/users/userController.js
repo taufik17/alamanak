@@ -1,6 +1,18 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const model = require('../../model/users/userModel');
 const modelSearch = require('../../model/users/searchUserModel');
+require('dotenv').config();
+
+const myProfile = async (req, res) => {
+  try {
+    const token = req.headers?.authorization;
+    const decoded = jwt.verify(token?.substring(7, token?.length), process.env.SECRET_KEY);
+    res.send(decoded);
+  } catch (error) {
+    res.status(400).send('Error Found');
+  }
+};
 
 const registerUser = async (req, res) => {
   try {
@@ -101,5 +113,5 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-  registerUser, editUser, deleteUser,
+  registerUser, editUser, deleteUser, myProfile,
 };

@@ -11,6 +11,7 @@ const searchUserRoutes = require('./routes/users/searchUsersRoutes');
 const userRoutes = require('./routes/users/usersRoutes');
 const recipeRoutes = require('./routes/recipe/recipeRoutes');
 const searchRecipeRoutes = require('./routes/recipe/searchRecipeRoutes');
+const commentRoutes = require('./routes/comment/commentRoutes');
 const searchCommentRoutes = require('./routes/comment/searchCommentRoutes');
 const authRoutes = require('./routes/auth/authLoginRoutes');
 
@@ -33,6 +34,7 @@ app.use('/', searchUserRoutes);
 app.use('/', forms.single('image'), userRoutes);
 app.use('/', recipeRoutes);
 app.use('/', searchRecipeRoutes);
+app.use('/', commentRoutes);
 app.use('/', searchCommentRoutes);
 app.use('/', authRoutes);
 
