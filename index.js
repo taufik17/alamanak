@@ -13,7 +13,7 @@ const recipeRoutes = require('./routes/recipe/recipeRoutes');
 const searchRecipeRoutes = require('./routes/recipe/searchRecipeRoutes');
 const commentRoutes = require('./routes/comment/commentRoutes');
 const searchCommentRoutes = require('./routes/comment/searchCommentRoutes');
-const authRoutes = require('./routes/auth/authLoginRoutes');
+const authRoutes = require('./routes/auth/auth');
 
 const forms = multer();
 

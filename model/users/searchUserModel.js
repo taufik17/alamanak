@@ -14,6 +14,23 @@ const getAllUser = (props) => new Promise((resolve, reject) => {
   );
 });
 
+const getProfileUser = (email) => new Promise((resolve, reject) => {
+  db.query(
+    `SELECT * FROM profile 
+    INNER JOIN users 
+    ON users.id_user = profile.id_user 
+    WHERE users.email = $1`,
+    [email],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
 const getByName = (name) => new Promise((resolve, reject) => {
   db.query(
     'SELECT * FROM profile WHERE LOWER(name) LIKE LOWER($1)',
@@ -39,31 +56,17 @@ const getByID = (id) => new Promise((resolve, reject) => {
 });
 
 const getProfileMail = (email) => new Promise((resolve, reject) => {
-  db.query(`SELECT username, email, password, users.id_user AS id_user
-            FROM users 
-            INNER JOIN profile 
-            ON users.id_user = profile.id_user 
-            WHERE email = $1`, [email], (error, results) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(results);
-    }
-  });
-});
-
-const getProfileUsername = (username) => new Promise((resolve, reject) => {
-  db.query(`SELECT username, email 
-            FROM users 
-            INNER JOIN profile 
-            ON users.id_user = profile.id_user 
-            WHERE username = $1`, [username], (error, results) => {
-    if (error) {
-      reject(error);
-    } else {
-      resolve(results);
-    }
-  });
+  db.query(
+    'SELECT * FROM users WHERE email = $1',
+    [email],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
 });
 
 const getProfileID = (id) => new Promise((resolve, reject) => {
@@ -82,5 +85,5 @@ module.exports = {
   getByID,
   getProfileID,
   getProfileMail,
-  getProfileUsername,
+  getProfileUser,
 };

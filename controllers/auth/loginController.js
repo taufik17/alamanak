@@ -14,15 +14,22 @@ const getLogin = async (req, res) => {
 
       if (checkPassword) {
         const token = jwt.sign(getUserByEmail?.rows[0], process.env.SECRET_KEY, { expiresIn: '24h' });
-        res.status(200).send(token);
+        res.status(200).send({
+          message: 'Login Success',
+          token,
+        });
       } else {
-        res.status(401).send('Invalid Password');
+        res.status(401).send({
+          message: 'Login Failed, Invalid Password',
+        });
       }
     } else {
-      res.status(400).send('Email Not Registed');
+      res.status(400).send({
+        message: 'Login Failed, Email not registered',
+      });
     }
   } catch (error) {
-    res.status(400).send('ada yang error');
+    res.status(400).send('Something error');
   }
 };
 

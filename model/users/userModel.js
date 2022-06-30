@@ -2,8 +2,8 @@ const db = require('../../db');
 
 const addUser = (props) => new Promise((resolve, reject) => {
   db.query(
-    'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *',
-    [props.username, props.password],
+    'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
+    [props.email, props.password],
     (error, results) => {
       if (error) {
         reject(error);
@@ -16,8 +16,8 @@ const addUser = (props) => new Promise((resolve, reject) => {
 
 const addProfile = (props) => new Promise((resolve, reject) => {
   db.query(
-    'INSERT INTO profile (name, email, phone, user_image, id_user) VALUES ($1, $2, $3, $4, $5)',
-    [props.name, props.email, props.phone, props.userImage, props.userId],
+    'INSERT INTO profile (name, phone, user_image, id_user) VALUES ($1, $2, $3, $4)',
+    [props.name, props.phone, props.userImage, props.userId],
     (error, results) => {
       if (error) {
         reject(error);
@@ -30,8 +30,8 @@ const addProfile = (props) => new Promise((resolve, reject) => {
 
 const doEditUser = (props) => new Promise((resolve, reject) => {
   db.query(
-    'UPDATE users SET username = $1, password = $2 WHERE id_user = $3',
-    [props.inputUsername, props.inputPassword, props.id_user],
+    'UPDATE users SET password = $1 WHERE id_user = $2',
+    [props.inputPassword, props.id_user],
     (error, results) => {
       if (error) {
         reject(error);
@@ -44,8 +44,8 @@ const doEditUser = (props) => new Promise((resolve, reject) => {
 
 const doEditProfil = (props) => new Promise((resolve, reject) => {
   db.query(
-    'UPDATE profile SET name = $1, email = $2, phone = $3, user_image = $4 WHERE id_user = $5',
-    [props.inputName, props.inputEmail, props.inputPhone, props.inputUserImage, props.id_user],
+    'UPDATE profile SET name = $1, phone = $2 WHERE id_user = $3',
+    [props.inputName, props.inputPhone, props.id_user],
     (error, results) => {
       if (error) {
         reject(error);
