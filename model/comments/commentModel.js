@@ -30,7 +30,7 @@ const doEditComment = (props) => new Promise((resolve, reject) => {
   );
 });
 
-// edit delete
+// delete comment
 const doDeleteComment = (id) => new Promise((resolve, reject) => {
   db.query(
     'DELETE FROM comment WHERE id_comment = $1',

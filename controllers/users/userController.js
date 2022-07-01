@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const model = require('../../model/users/userModel');
 const modelSearch = require('../../model/users/searchUserModel');
 require('dotenv').config();
@@ -31,7 +32,10 @@ const editUser = async (req, res) => {
       if (name) message += 'name, ';
       if (phone) message += 'phone, ';
 
-      const doEditUser = await model.doEditUser({ inputPassword, id_user: idUser });
+      const salt = bcrypt.genSaltSync(15);
+      const hash = bcrypt.hashSync(inputPassword, salt);
+
+      const doEditUser = await model.doEditUser({ inputPassword: hash, id_user: idUser });
       const doEditProfil = await model.doEditProfil({
         inputName: inputName.trim(), inputPhone: inputPhone.trim(), id_user: idUser,
       });
@@ -44,7 +48,6 @@ const editUser = async (req, res) => {
       res.status(400).send('data tidak ditemukan');
     }
   } catch (error) {
-    console.log(error);
     res.status(500).send('Found Error');
   }
 };

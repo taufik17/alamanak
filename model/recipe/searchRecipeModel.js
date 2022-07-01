@@ -50,6 +50,16 @@ const getByUser = (id) => new Promise((resolve, reject) => {
   });
 });
 
+const getByID = (id) => new Promise((resolve, reject) => {
+  db.query('SELECT * FROM recipe WHERE id_recipe = $1', [id], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
 const getStepVideo = (id) => new Promise((resolve, reject) => {
   db.query('SELECT * FROM video WHERE id_recipe = $1', [id], (error, results) => {
     if (error) {
@@ -66,4 +76,5 @@ module.exports = {
   getStepVideo,
   getByUser,
   getLatestRecipe,
+  getByID,
 };
