@@ -7,6 +7,7 @@ const checkToken = async (req, res, next) => {
     const decoded = jwt.verify(token?.substring(7, token?.length), process.env.SECRET_KEY);
     if (decoded) {
       res.locals = decoded.id_user;
+      res.role = decoded.role;
       next();
     }
   } catch (error) {
@@ -14,4 +15,17 @@ const checkToken = async (req, res, next) => {
   }
 };
 
-module.exports = { checkToken };
+const checkRole = async (req, res, next) => {
+  try {
+    const { role } = req.res;
+    if (role === true) {
+      next();
+    } else {
+      res.status(401).send('Not Have Premission');
+    }
+  } catch (error) {
+    res.status(400).send("Error's Happen");
+  }
+};
+
+module.exports = { checkToken, checkRole };

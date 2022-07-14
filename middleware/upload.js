@@ -6,8 +6,10 @@ const multer = require('multer');
 const multerUtils = require('../multer');
 
 const uploadSingle = (req, res, next) => {
-  console.log('Sampai disini');
+  const { recipeName, ingredients } = req.body;
+  console.log('tes', recipeName, ingredients);
   const doUploadSingle = multerUtils.single('image');
+  console.log('file', req.file);
 
   doUploadSingle(req, res, (err) => {
     try {

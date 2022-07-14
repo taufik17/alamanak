@@ -1,3 +1,4 @@
+require('dotenv').config();
 const model = require('../../model/recipe/recipeModel');
 const searchRecipeModel = require('../../model/recipe/searchRecipeModel');
 
@@ -10,11 +11,16 @@ const getAddRecipe = async (req, res) => {
       // video,
     } = req.body;
     const idUser = req.res.locals;
+    const {
+      image,
+    } = req.res;
+    const urlImage = `${process.env.base_url}/images/${image}`;
     const addRecipe = await model.addRecipe({
       idUser,
       recipeName: recipeName.trim(),
       recipeImage,
       ingredients,
+      image: urlImage,
     });
     // disini upload video
     if (addRecipe) {
@@ -28,12 +34,18 @@ const getAddRecipe = async (req, res) => {
 const getEditRecipe = async (req, res) => {
   try {
     const {
-      idRecipe, recipeName, ingredients,
+      idRecipe,
+      recipeName,
+      ingredients,
     } = req.body;
     const idUser = req.res.locals;
     const checkRecipe = await searchRecipeModel.getByID(idRecipe);
     if (checkRecipe.rows[0].id_user === idUser) {
-      const doEditRecipe = await model.doEditRecipe({ idRecipe, recipeName, ingredients });
+      const doEditRecipe = await model.doEditRecipe({
+        idRecipe,
+        recipeName: recipeName.trim(),
+        ingredients,
+      });
       if (doEditRecipe) {
         res.send('Edit Successfully');
       } else {
@@ -70,5 +82,7 @@ const getDeleteRecipe = async (req, res) => {
 };
 
 module.exports = {
-  getAddRecipe, getEditRecipe, getDeleteRecipe,
+  getAddRecipe,
+  getEditRecipe,
+  getDeleteRecipe,
 };

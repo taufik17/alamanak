@@ -6,8 +6,17 @@ const checkParamAdd = async (req, res, next) => {
     const {
       recipeName, ingredients,
     } = req.body;
-    const isValid = recipeName && ingredients;
+    let image;
+
+    if (req.file.filename) {
+      image = req.file.filename;
+    } else {
+      image = 'default.jpg';
+    }
+
+    const isValid = recipeName && ingredients && image;
     if (isValid) {
+      res.image = image;
       next();
     } else {
       res.status(400).send('Error params');
