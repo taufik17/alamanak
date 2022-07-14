@@ -50,6 +50,11 @@ app.use('/', cors(corsOptionsDelegate), searchRecipeRoutes);
 app.use('/', cors(corsOptionsDelegate), commentRoutes);
 app.use('/', cors(corsOptionsDelegate), searchCommentRoutes);
 app.use('/', cors(corsOptionsDelegate), authRoutes);
+
+app.use('*', (req, res) => {
+  res.send('Sukses');
+});
+
 // app.use('/', upload);
 
 // app.use('/testing', forms.single('hello'), (req, res) => {

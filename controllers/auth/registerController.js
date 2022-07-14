@@ -23,6 +23,7 @@ const registerUser = async (req, res) => {
       res.status(400).send('Register Failed');
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send('ada yang error');
   }
 };
