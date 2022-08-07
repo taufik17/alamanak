@@ -14,9 +14,11 @@ const getLogin = async (req, res) => {
 
       if (checkPassword) {
         const token = jwt.sign(getUserByEmail?.rows[0], process.env.SECRET_KEY, { expiresIn: '24h' });
+        const getProfile = await modelSearch.getProfileID(getUserByEmail?.rows[0]?.id_user);
         res.status(200).send({
           message: 'Login Success',
           token,
+          user: { ...getUserByEmail.rows[0], ...getProfile.rows[0], ...{ password: null } },
         });
       } else {
         res.status(401).send({

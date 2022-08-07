@@ -9,6 +9,15 @@ const getAllRecipe = async (req, res) => {
   }
 };
 
+const getAllCategory = async (req, res) => {
+  try {
+    const getData = await model.getAllCategory();
+    res.send({ data: getData.rows, jumlahData: getData.rowCount });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const findRecipeName = async (req, res) => {
   try {
     const { name } = req.body;
@@ -81,4 +90,5 @@ module.exports = {
   findRecipeUser,
   getLatestRecipe,
   findMyRecipe,
+  getAllCategory,
 };

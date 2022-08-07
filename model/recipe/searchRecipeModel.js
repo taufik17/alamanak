@@ -14,6 +14,24 @@ const getAllRecipe = () => new Promise((resolve, reject) => {
   );
 });
 
+// get all category recipe
+const getAllCategory = () => new Promise((resolve, reject) => {
+  db.query(
+    `SELECT categories.id_category, categories.name_category, categories.image, COUNT(categories.id_category) AS jumlah
+    FROM categories 
+    INNER JOIN recipe 
+    ON categories.id_category = recipe.id_category 
+    GROUP BY categories.id_category`,
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
 // get 5 latest recipe
 const getLatestRecipe = () => new Promise((resolve, reject) => {
   db.query(
@@ -77,4 +95,5 @@ module.exports = {
   getByUser,
   getLatestRecipe,
   getByID,
+  getAllCategory,
 };

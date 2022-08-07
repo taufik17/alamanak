@@ -5,11 +5,14 @@ const controller = require('../../controllers/recipe/searchRecipeController');
 // get recipe
 Router.get('/recipe', controller.getAllRecipe);
 
+// get category recipe
+Router.get('/category_recipe', controller.getAllCategory);
+
 // find recipe by name
 Router.get('/recipe/find/name', controller.findRecipeName);
 
 // find recipe by user
-Router.get('/recipe/find/id_user', controller.findRecipeUser);
+Router.post('/recipe/find/id_user', controller.findRecipeUser);
 
 // get step video
 Router.get('/recipe/video/id_recipe', controller.getStepVideo);

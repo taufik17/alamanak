@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
     const {
       email, password, name, phone,
     } = req.body;
-    const userImage = 'default.jpg';
+    const userImage = 'http://localhost:8000/images/profile/default.svg';
 
     const salt = bcrypt.genSaltSync(15);
     const hash = bcrypt.hashSync(password, salt);
