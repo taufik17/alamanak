@@ -28,6 +28,48 @@ const addLikeRecipe = (props) => new Promise((resolve, reject) => {
   );
 });
 
+const unLikeRecipe = (props) => new Promise((resolve, reject) => {
+  db.query(
+    'DELETE FROM like_recipe WHERE id_recipe = $1 AND id_user = $2',
+    [props.idRecipe, props.idUser],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
+const addSaveRecipe = (props) => new Promise((resolve, reject) => {
+  db.query(
+    'INSERT INTO save_recipe (id_recipe, id_user) VALUES ($1, $2) RETURNING *',
+    [props.idRecipe, props.idUser],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
+const unSaveRecipe = (props) => new Promise((resolve, reject) => {
+  db.query(
+    'DELETE FROM save_recipe WHERE id_recipe = $1 AND id_user = $2',
+    [props.idRecipe, props.idUser],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
 // edit comment
 const doEditRecipe = (props) => new Promise((resolve, reject) => {
   db.query(
@@ -78,4 +120,7 @@ module.exports = {
   doEditRecipe,
   doDeleteRecipe,
   addLikeRecipe,
+  unLikeRecipe,
+  addSaveRecipe,
+  unSaveRecipe,
 };

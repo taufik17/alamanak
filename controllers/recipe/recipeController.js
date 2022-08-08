@@ -49,6 +49,60 @@ const getAddLikeRecipe = async (req, res) => {
   }
 };
 
+const getUnlikeRecipe = async (req, res) => {
+  try {
+    const {
+      idRecipe,
+      idUser,
+    } = req.body;
+    const unLikeRecipe = await model.unLikeRecipe({
+      idRecipe,
+      idUser,
+    });
+    if (unLikeRecipe) {
+      res.send('Unlike Recipe Successfully');
+    }
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const getAddSaveRecipe = async (req, res) => {
+  try {
+    const {
+      idRecipe,
+      idUser,
+    } = req.body;
+    const addSaveRecipe = await model.addSaveRecipe({
+      idRecipe,
+      idUser,
+    });
+    if (addSaveRecipe) {
+      res.send('Save Recipe Successfully');
+    }
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const getUnsaveRecipe = async (req, res) => {
+  try {
+    const {
+      idRecipe,
+      idUser,
+    } = req.body;
+    const unSaveRecipe = await model.unSaveRecipe({
+      idRecipe,
+      idUser,
+    });
+    if (unSaveRecipe) {
+      res.send('Unsave Recipe Successfully');
+    }
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const getEditRecipe = async (req, res) => {
   try {
     const {
@@ -104,4 +158,7 @@ module.exports = {
   getEditRecipe,
   getDeleteRecipe,
   getAddLikeRecipe,
+  getUnlikeRecipe,
+  getAddSaveRecipe,
+  getUnsaveRecipe,
 };

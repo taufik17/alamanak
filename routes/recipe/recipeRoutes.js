@@ -17,9 +17,33 @@ Router.post(
 // add like recipe
 Router.post(
   '/recipe/addLikeRecipe',
-  verifyToken.checkToken,
+  // verifyToken.checkToken,
   midRecipe.checkParamLikeRecipe,
   controller.getAddLikeRecipe,
+);
+
+// un like recipe
+Router.post(
+  '/recipe/addUnlikeRecipe',
+  // verifyToken.checkToken,
+  midRecipe.checkParamLikeRecipe,
+  controller.getUnlikeRecipe,
+);
+
+// add save recipe
+Router.post(
+  '/recipe/addSaveRecipe',
+  // verifyToken.checkToken,
+  midRecipe.checkParamLikeRecipe,
+  controller.getAddSaveRecipe,
+);
+
+// un save recipe
+Router.post(
+  '/recipe/addUnsaveRecipe',
+  // verifyToken.checkToken,
+  midRecipe.checkParamLikeRecipe,
+  controller.getUnsaveRecipe,
 );
 
 // Upload Single Image
