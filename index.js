@@ -51,6 +51,11 @@ app.use('/', cors(corsOptionsDelegate), commentRoutes);
 app.use('/', cors(corsOptionsDelegate), searchCommentRoutes);
 app.use('/', cors(corsOptionsDelegate), authRoutes);
 
+app.use('/tespost', (req, res) => {
+  console.log(req.body);
+  res.send('testing');
+});
+
 app.use('*', (req, res) => {
   res.send('Sukses');
 });

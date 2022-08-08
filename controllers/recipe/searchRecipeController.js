@@ -18,6 +18,52 @@ const getAllCategory = async (req, res) => {
   }
 };
 
+const findRecipePopular = async (req, res) => {
+  try {
+    const getData = await model.getPopularRecipe();
+    res.send({ data: getData.rows, jumlahData: getData.rowCount });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findRecipeLiked = async (req, res) => {
+  try {
+    const getData = await model.getLikedRecipe();
+    res.send({ data: getData.rows, jumlahData: getData.rowCount });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findIslikeRecipe = async (req, res) => {
+  try {
+    const { idUser, idRecipe } = req.body;
+    const getData = await model.getIsLikeRecipe(idUser, idRecipe);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findIsSavedRecipe = async (req, res) => {
+  try {
+    const { idUser, idRecipe } = req.body;
+    const getData = await model.getIsSavedRecipe(idUser, idRecipe);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const findRecipeName = async (req, res) => {
   try {
     const { name } = req.body;
@@ -91,4 +137,8 @@ module.exports = {
   getLatestRecipe,
   findMyRecipe,
   getAllCategory,
+  findRecipePopular,
+  findRecipeLiked,
+  findIslikeRecipe,
+  findIsSavedRecipe,
 };

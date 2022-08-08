@@ -31,6 +31,24 @@ const getAddRecipe = async (req, res) => {
   }
 };
 
+const getAddLikeRecipe = async (req, res) => {
+  try {
+    const {
+      idRecipe,
+      idUser,
+    } = req.body;
+    const addLikeRecipe = await model.addLikeRecipe({
+      idRecipe,
+      idUser,
+    });
+    if (addLikeRecipe) {
+      res.send('Like Recipe Successfully');
+    }
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const getEditRecipe = async (req, res) => {
   try {
     const {
@@ -85,4 +103,5 @@ module.exports = {
   getAddRecipe,
   getEditRecipe,
   getDeleteRecipe,
+  getAddLikeRecipe,
 };

@@ -14,6 +14,14 @@ Router.post(
   controller.getAddRecipe,
 );
 
+// add like recipe
+Router.post(
+  '/recipe/addLikeRecipe',
+  verifyToken.checkToken,
+  midRecipe.checkParamLikeRecipe,
+  controller.getAddLikeRecipe,
+);
+
 // Upload Single Image
 Router.post('/image', upload.uploadSingle, (req, res) => {
   const { testing, testing2 } = req.body;

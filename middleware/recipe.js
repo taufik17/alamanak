@@ -27,6 +27,23 @@ const checkParamAdd = async (req, res, next) => {
   }
 };
 
+const checkParamLikeRecipe = async (req, res, next) => {
+  try {
+    const {
+      idRecipe, idUser,
+    } = req.body;
+    const isValid = idRecipe && idUser;
+    if (isValid) {
+      next();
+    } else {
+      res.status(400).send('Error params');
+      return;
+    }
+  } catch (error) {
+    res.status(500).send('Found Error');
+  }
+};
+
 const checkParamEdit = async (req, res, next) => {
   try {
     const {
@@ -73,4 +90,6 @@ const checkParamDelete = async (req, res, next) => {
   }
 };
 
-module.exports = { checkParamAdd, checkParamEdit, checkParamDelete };
+module.exports = {
+  checkParamAdd, checkParamEdit, checkParamDelete, checkParamLikeRecipe,
+};
