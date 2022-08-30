@@ -1,30 +1,30 @@
-const multer = require("multer");
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, "./images");
+    cb(null, './images');
   },
   filename(req, file, cb) {
     cb(
       null,
       `${Date.now()}_${Math.random()}_${uuidv4()}_${path.extname(
-        file.originalname
-      )}`
+        file.originalname,
+      )}`,
     );
   },
 });
 
 const fileFilter = (req, file, cb) => {
   if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
+    file.mimetype === 'image/png'
+    || file.mimetype === 'image/jpg'
+    || file.mimetype === 'image/jpeg'
   ) {
     cb(null, true);
   } else {
-    cb("Error: Images Only!");
+    cb('Error: Images Only!');
   }
 };
 

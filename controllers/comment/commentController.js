@@ -22,6 +22,27 @@ const addComment = async (req, res) => {
   }
 };
 
+const addCommentRecipe = async (req, res) => {
+  try {
+    const {
+      idUser,
+      comment,
+      idRecipe,
+    } = req.body;
+    const doAddComment = await model.doAddCommentRecipe({
+      idUser,
+      comment,
+      idRecipe,
+    });
+    // disini upload video
+    if (doAddComment) {
+      res.send('Add Comment Successfully');
+    }
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const editComment = async (req, res) => {
   try {
     const {
@@ -67,5 +88,5 @@ const deleteComment = async (req, res) => {
 };
 
 module.exports = {
-  addComment, editComment, deleteComment,
+  addComment, editComment, deleteComment, addCommentRecipe,
 };

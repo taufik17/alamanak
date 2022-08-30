@@ -16,7 +16,11 @@ const getAllComment = () => new Promise((resolve, reject) => {
 
 // get comment by id recipe
 const getCommentRecipe = (id) => new Promise((resolve, reject) => {
-  db.query('SELECT * FROM comment WHERE id_recipe = $1', [id], (error, results) => {
+  db.query(`SELECT id_comment, text_comment, name, user_image FROM comment 
+  INNER JOIN users ON users.id_user = comment.id_user
+  INNER JOIN profile ON profile.id_user = users.id_user
+  WHERE comment.id_recipe = $1
+  ORDER BY id_comment DESC`, [id], (error, results) => {
     if (error) {
       reject(error);
     } else {

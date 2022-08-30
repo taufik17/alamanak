@@ -78,6 +78,20 @@ const findRecipeName = async (req, res) => {
   }
 };
 
+const findRecipeID = async (req, res) => {
+  try {
+    const { idRecipe } = req.body;
+    const getData = await model.getByIdRecipe(idRecipe);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const findMyRecipe = async (req, res) => {
   try {
     const idUser = req.res.locals;
@@ -95,7 +109,63 @@ const findMyRecipe = async (req, res) => {
 const findRecipeUser = async (req, res) => {
   try {
     const { id } = req.body;
-    const getData = await model.getByUser(id);
+    const getData = await model.geMyRecipe(id);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findLikeRecipeUser = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const getData = await model.getLikeByUser(id);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findSavedRecipeUser = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const getData = await model.getSavedByUser(id);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const getSearchRecipe = async (req, res) => {
+  try {
+    const { keyword } = req.body;
+    const getData = await model.getSearchByKeyword(keyword);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const getRecipeCategory = async (req, res) => {
+  try {
+    const { idCategory } = req.body;
+    const getData = await model.getRecipeBycategory(idCategory);
 
     res.send({
       data: getData.rows,
@@ -141,4 +211,9 @@ module.exports = {
   findRecipeLiked,
   findIslikeRecipe,
   findIsSavedRecipe,
+  findRecipeID,
+  findLikeRecipeUser,
+  findSavedRecipeUser,
+  getSearchRecipe,
+  getRecipeCategory,
 };

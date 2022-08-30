@@ -15,6 +15,21 @@ const doAddComment = (props) => new Promise((resolve, reject) => {
   );
 });
 
+// insert comment fe alamanak
+const doAddCommentRecipe = (props) => new Promise((resolve, reject) => {
+  db.query(
+    'INSERT INTO comment (text_comment, id_user, id_recipe) VALUES ($1, $2, $3)',
+    [props.comment, props.idUser, props.idRecipe],
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
 // edit comment
 const doEditComment = (props) => new Promise((resolve, reject) => {
   db.query(
@@ -46,5 +61,5 @@ const doDeleteComment = (id) => new Promise((resolve, reject) => {
 });
 
 module.exports = {
-  doAddComment, doEditComment, doDeleteComment,
+  doAddComment, doEditComment, doDeleteComment, doAddCommentRecipe,
 };

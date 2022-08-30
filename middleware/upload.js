@@ -1,9 +1,17 @@
+require('dotenv').config();
 const fs = require('fs');
 const { promisify } = require('util');
 
 const unlinkAsync = promisify(fs.unlink);
+const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const multerUtils = require('../multer');
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const uploadSingle = (req, res, next) => {
   const { recipeName, ingredients } = req.body;
@@ -22,8 +30,12 @@ const uploadSingle = (req, res, next) => {
         res.status(400).send(err ?? 'Something went wrong!');
         return;
       }
-
-      next();
+      (async () => {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        res.img_url = result.secure_url;
+        console.log('img url', result);
+        next();
+      })();
     } catch (error) {
       res.status(500).send(error?.message ?? 'Upload Failed');
     }

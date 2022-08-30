@@ -6,6 +6,6 @@ const controller = require('../../controllers/comment/searchCommentController');
 Router.get('/comment', controller.getAllComment);
 
 // find comment by recipe
-Router.get('/comment/find/id_recipe', controller.findCommentRecipe);
+Router.post('/comment/find/id_recipe', controller.findCommentRecipe);
 
 module.exports = Router;

@@ -11,8 +11,8 @@ const getAllComment = async (req, res) => {
 
 const findCommentRecipe = async (req, res) => {
   try {
-    const { id } = req.body;
-    const getData = await model.getCommentRecipe(id);
+    const { idRecipe } = req.body;
+    const getData = await model.getCommentRecipe(idRecipe);
 
     res.send({
       data: getData.rows,

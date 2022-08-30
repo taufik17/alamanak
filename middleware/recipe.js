@@ -9,7 +9,7 @@ const checkParamAdd = async (req, res, next) => {
     let image;
 
     if (req.file.filename) {
-      image = req.file.filename;
+      image = req.res.img_url;
     } else {
       image = 'default.jpg';
     }

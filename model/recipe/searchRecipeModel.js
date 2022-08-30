@@ -122,6 +122,20 @@ const getByName = (name) => new Promise((resolve, reject) => {
   });
 });
 
+// get recipe by id recipe
+const getByIdRecipe = (idRecipe) => new Promise((resolve, reject) => {
+  db.query(`SELECT * FROM recipe 
+  INNER JOIN users ON users.id_user = recipe.id_user
+  INNER JOIN profile ON profile.id_user = users.id_user
+  WHERE recipe.id_recipe = $1`, [idRecipe], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
 // get recipe by who user post recipe
 const getByUser = (id) => new Promise((resolve, reject) => {
   db.query(`SELECT * FROM recipe 
@@ -136,8 +150,70 @@ const getByUser = (id) => new Promise((resolve, reject) => {
   });
 });
 
+// get recipe by who user post recipe
+const getLikeByUser = (id) => new Promise((resolve, reject) => {
+  db.query(`SELECT * FROM recipe 
+  INNER JOIN like_recipe
+  ON recipe.id_recipe = like_recipe.id_recipe
+  WHERE like_recipe.id_user = $1`, [id], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
+// get save recipe by iduser
+const getSavedByUser = (id) => new Promise((resolve, reject) => {
+  db.query(`SELECT * FROM recipe 
+  INNER JOIN save_recipe
+  ON recipe.id_recipe = save_recipe.id_recipe
+  WHERE save_recipe.id_user = $1`, [id], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
+// get recipe by who user post recipe
+const geMyRecipe = (id) => new Promise((resolve, reject) => {
+  db.query(`SELECT * FROM recipe 
+  INNER JOIN users ON recipe.id_user = users.id_user
+  WHERE users.id_user = $1`, [id], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
+// get recipe by keyword name and ingredients
+const getSearchByKeyword = (keyword) => new Promise((resolve, reject) => {
+  db.query('SELECT * FROM recipe WHERE LOWER(recipe_name) LIKE LOWER($1) OR LOWER(ingredients) LIKE LOWER($1)', [`%${keyword}%`], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
 const getByID = (id) => new Promise((resolve, reject) => {
   db.query('SELECT * FROM recipe WHERE id_recipe = $1', [id], (error, results) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(results);
+    }
+  });
+});
+
+const getRecipeBycategory = (category) => new Promise((resolve, reject) => {
+  db.query('SELECT * FROM recipe WHERE recipe.id_category = $1', [category], (error, results) => {
     if (error) {
       reject(error);
     } else {
@@ -168,4 +244,10 @@ module.exports = {
   getLikedRecipe,
   getIsLikeRecipe,
   getIsSavedRecipe,
+  getByIdRecipe,
+  getLikeByUser,
+  geMyRecipe,
+  getSavedByUser,
+  getSearchByKeyword,
+  getRecipeBycategory,
 };

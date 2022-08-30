@@ -14,7 +14,7 @@ const getAddRecipe = async (req, res) => {
     const {
       image,
     } = req.res;
-    const urlImage = `${process.env.base_url}/images/${image}`;
+    const urlImage = image;
     const addRecipe = await model.addRecipe({
       idUser,
       recipeName: recipeName.trim(),
