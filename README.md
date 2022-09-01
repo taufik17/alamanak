@@ -50,7 +50,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Create a Node.js app for building mama recipe RESTful APIs using Express.
+Create a Node.js app for building Alamanak RESTful APIs using Express.
 
 ### Built With
 This app was built with some technologies below:
@@ -98,23 +98,20 @@ npm install
 Create .env file in your root project folder.
 
 ```env
-# app
-APP_NAME=
-NODE_ENV=
-PORT=
-API_URL=
-APP_CLIENT=
-
-# database
-DB_HOST=
+base_url=
+EXPRESS_PORT=
 DB_USER=
+DB_HOST=
+DB_DATABASE=
 DB_PASSWORD=
-DB_NAME=
 DB_PORT=
+SECRET_KEY=
+ENV_MODE=
+DB_URI=
 
-# jwt
-JWT_SECRET=
-JWT_EXPIRED=
+CLOUDINARY_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
 ```
 
 
@@ -137,13 +134,13 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 ## Related Project
-:rocket: [`Backend Mama Recipe`](https://github.com/fandipras7/foodRecipeApi)
+:rocket: [`Backend Alamanak`](https://github.com/taufik17/alamanak.git)
 
-:rocket: [`Frontend Mama Recipe`](https://github.com/fandipras7/food_recipe_app)
+:rocket: [`Frontend Alamanak`](https://github.com/taufik17/alamanak-frontend.git)
 
-:rocket: [`Web Service`](https://food-recipe-fandi.herokuapp.com)
+:rocket: [`Web Service`](#)
 
-:rocket: [`Demo Mama Recipe`](https://food-recipe-app-ten.vercel.app/Home)
+:rocket: [`Demo Alamanak`](#)
 
 ## Contact
 
