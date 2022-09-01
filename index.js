@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const xss = require('xss-clean');
 
 const app = express();
 const port = process.env.PORT || process.env.EXPRESS_PORT;
@@ -42,6 +43,7 @@ const corsOptionsDelegate = function (req, callback) {
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(helmet());
+app.use(xss());
 
 app.use('/', cors(corsOptionsDelegate), searchUserRoutes);
 app.use('/', cors(corsOptionsDelegate), userRoutes);
