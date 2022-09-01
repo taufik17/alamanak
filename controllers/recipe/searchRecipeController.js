@@ -162,6 +162,36 @@ const getSearchRecipe = async (req, res) => {
   }
 };
 
+const getRecipeSearch = async (req, res) => {
+  try {
+    const { keyword } = req.query;
+    const getData = await model.getSearchByKeyword(keyword);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+// By param
+const getRecipeById = async (req, res) => {
+  try {
+    const { idRecipe } = req.params;
+    console.log(idRecipe);
+    const getData = await model.getByIdRecipe(idRecipe);
+
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount,
+    });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
 const getRecipeCategory = async (req, res) => {
   try {
     const { idCategory } = req.body;
@@ -216,4 +246,6 @@ module.exports = {
   findSavedRecipeUser,
   getSearchRecipe,
   getRecipeCategory,
+  getRecipeById,
+  getRecipeSearch,
 };

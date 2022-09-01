@@ -49,4 +49,10 @@ Router.get('/recipe/find/myrecipe', verifyToken.checkToken, controller.findMyRec
 
 // find recipe by ingredients and name recipe
 Router.post('/recipe/searchRecipe', controller.getSearchRecipe);
+
+// find recipe by ingredients and name recipe query
+Router.get('/recipe/search', controller.getRecipeSearch);
+
+// find recipe by id param
+Router.get('/recipe/:idRecipe', controller.getRecipeById);
 module.exports = Router;
