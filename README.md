@@ -60,8 +60,6 @@ This app was built with some technologies below:
 - [PostgreSQL](https://www.postgresql.org/)
 - and other
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -95,8 +93,6 @@ npm install
 - Type ` npm run dev` To Start Development
 - Type ` npm run start` To Start Production
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ### Setup .env example
 
 Create .env file in your root project folder.
@@ -121,7 +117,6 @@ JWT_SECRET=
 JWT_EXPIRED=
 ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ## REST API
 
@@ -129,7 +124,6 @@ You can view my Postman collection [here]()
 </br>
 [![Run in Postman](https://run.pstmn.io/button.svg)]()
 
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -142,8 +136,6 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## Related Project
 :rocket: [`Backend Mama Recipe`](https://github.com/fandipras7/foodRecipeApi)
 
@@ -153,13 +145,9 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Demo Mama Recipe`](https://food-recipe-app-ten.vercel.app/Home)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## Contact
 
-My Email : fprasetyo4@gmail.com
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+My Email : taufikagungsantoso17@gmail.com
 
 ## License
 Distributed under the [MIT](/LICENSE) License.
