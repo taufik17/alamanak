@@ -88,7 +88,9 @@ cd alamanak
 ```
 npm install
 ```
-- Make a new database
+- Create new database named `alamanak`
+- Restore database file in `database/db` using pgadmin4
+
 - <a href="#setup-env-example">Setup .env</a>
 - Type ` npm run dev` To Start Development
 - Type ` npm run start` To Start Production
