@@ -2,8 +2,8 @@ const db = require('../../db');
 
 const addRecipe = (props) => new Promise((resolve, reject) => {
   db.query(
-    'INSERT INTO recipe (recipe_name, recipe_image, ingredients, id_user) VALUES ($1, $2, $3, $4) RETURNING *',
-    [props.recipeName, props.image, props.ingredients, props.idUser],
+    'INSERT INTO recipe (recipe_name, recipe_image, ingredients, id_user, id_category, taste) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+    [props.recipeName, props.image, props.ingredients, props.idUser, props.category, props.taste],
     (error, results) => {
       if (error) {
         reject(error);

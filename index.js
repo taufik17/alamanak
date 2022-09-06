@@ -31,7 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const allowlist = [
   'http://localhost:3000',
   'https://alamanak-frontend.vercel.app',
-  'https://alamanak-pijar.web.app,'
+  'https://alamanak-pijar.web.app',
+  'https://mobile-alamanak.vercel.app',
 ];
 const corsOptionsDelegate = function (req, callback) {
   let corsOption;

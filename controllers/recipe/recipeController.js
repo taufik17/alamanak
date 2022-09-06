@@ -8,7 +8,8 @@ const getAddRecipe = async (req, res) => {
       recipeName,
       recipeImage,
       ingredients,
-      // video,
+      category,
+      taste,
     } = req.body;
     const idUser = req.res.locals;
     const {
@@ -20,6 +21,8 @@ const getAddRecipe = async (req, res) => {
       recipeName: recipeName.trim(),
       recipeImage,
       ingredients,
+      category,
+      taste,
       image: urlImage,
     });
     // disini upload video
