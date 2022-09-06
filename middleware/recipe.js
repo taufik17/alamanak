@@ -4,7 +4,7 @@ const searchRecipeModel = require('../model/recipe/searchRecipeModel');
 const checkParamAdd = async (req, res, next) => {
   try {
     const {
-      recipeName, ingredients,
+      recipeName, ingredients, category, taste,
     } = req.body;
     let image;
 
@@ -14,7 +14,7 @@ const checkParamAdd = async (req, res, next) => {
       image = 'default.jpg';
     }
 
-    const isValid = recipeName && ingredients && image;
+    const isValid = recipeName && ingredients && image && category && taste;
     if (isValid) {
       res.image = image;
       next();

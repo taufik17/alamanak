@@ -25,8 +25,11 @@ const getAddRecipe = async (req, res) => {
       taste,
       image: urlImage,
     });
-    // disini upload video
-    if (addRecipe) {
+    const addVideo = await model.addVideo({
+      video_name: 'tes video',
+      id_recipe: addRecipe.rows[0].id_user,
+    })
+    if (addRecipe && addVideo) {
       res.send('Add Recipe Successfully');
     }
   } catch (error) {

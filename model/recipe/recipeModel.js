@@ -102,8 +102,8 @@ const doDeleteRecipe = (id) => new Promise((resolve, reject) => {
 
 const addVideo = (props) => new Promise((resolve, reject) => {
   db.query(
-    'INSERT INTO recipe (recipe_name, recipe_image, ingredients, id_user) VALUES ($1, $2, $3, $4) RETURNING *',
-    [props.recipeName, props.recipeImage, props.ingredients, props.idUser],
+    'INSERT INTO video (video_name, id_recipe) VALUES ($1, $2) RETURNING *',
+    [props.video_name, props.id_recipe],
     (error, results) => {
       if (error) {
         reject(error);
