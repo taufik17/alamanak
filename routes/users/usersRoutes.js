@@ -4,7 +4,7 @@ const controller = require('../../controllers/users/userController');
 // const midUser = require('../../middleware/user');
 
 // My Profile
-Router.post('/users/myprofile', verifyToken.checkToken, controller.myProfile);
+Router.get('/users/myprofile', verifyToken.checkToken, controller.myProfile);
 
 // edit users
 Router.patch('/users/edit', verifyToken.checkToken, controller.editUser);
