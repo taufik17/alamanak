@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable array-callback-return */
 const db = require('../../db');
 
 const addRecipe = (props) => new Promise((resolve, reject) => {
@@ -100,18 +102,21 @@ const doDeleteRecipe = (id) => new Promise((resolve, reject) => {
   );
 });
 
+// eslint-disable-next-line no-unused-vars
 const addVideo = (props) => new Promise((resolve, reject) => {
-  db.query(
-    'INSERT INTO video (video_name, id_recipe) VALUES ($1, $2) RETURNING *',
-    [props.video_name, props.id_recipe],
-    (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(results);
-      }
-    },
-  );
+  props.link.map((x) => {
+    db.query(
+      'INSERT INTO video (video_name, id_recipe, link) VALUES ($1, $2, $3) RETURNING *',
+      [props.video_name, props.id_recipe, Object.values(x).toString()],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      },
+    );
+  });
 });
 
 module.exports = {

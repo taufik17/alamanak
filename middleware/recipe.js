@@ -4,17 +4,17 @@ const searchRecipeModel = require('../model/recipe/searchRecipeModel');
 const checkParamAdd = async (req, res, next) => {
   try {
     const {
-      recipeName, ingredients, category, taste,
+      recipeName, ingredients, category, taste, video,
     } = req.body;
     let image;
 
     if (req.file.filename) {
       image = req.res.img_url;
     } else {
-      image = 'default.jpg';
+      image = 'https://res.cloudinary.com/alamanak/image/upload/v1662907284/placeholder_ufewrv.jpg';
     }
 
-    const isValid = recipeName && ingredients && image && category && taste;
+    const isValid = recipeName && ingredients && image && category && taste && video;
     if (isValid) {
       res.image = image;
       next();

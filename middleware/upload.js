@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 require('dotenv').config();
 const fs = require('fs');
 const { promisify } = require('util');
@@ -14,11 +15,7 @@ cloudinary.config({
 });
 
 const uploadSingle = (req, res, next) => {
-  const { recipeName, ingredients } = req.body;
-  console.log('tes', recipeName, ingredients);
   const doUploadSingle = multerUtils.single('image');
-  console.log('file', req.file);
-
   doUploadSingle(req, res, (err) => {
     try {
       if (err instanceof multer.MulterError) {
@@ -33,7 +30,6 @@ const uploadSingle = (req, res, next) => {
       (async () => {
         const result = await cloudinary.uploader.upload(req.file.path);
         res.img_url = result.secure_url;
-        console.log('img url', result);
         next();
       })();
     } catch (error) {

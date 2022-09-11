@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const Router = require('express').Router();
 const verifyToken = require('../../middleware/verifyToken');
 const controller = require('../../controllers/recipe/recipeController');
