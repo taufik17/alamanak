@@ -22,6 +22,10 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.6.0"
   },
+  "type": "module",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "lint-fix": "eslint . --fix",
     "start": "nodemon index.js"
