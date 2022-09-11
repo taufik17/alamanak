@@ -28,7 +28,7 @@ const getAddRecipe = async (req, res) => {
 
     const addVideo = await model.addVideo({
       video_name: recipeName.trim(),
-      id_recipe: addRecipe.rows[0].id_user,
+      id_recipe: addRecipe.rows[0].id_recipe,
       link: videoarr,
     });
 
@@ -36,6 +36,7 @@ const getAddRecipe = async (req, res) => {
       res.send("Add Recipe Successfully");
     }
   } catch (error) {
+    console.log(error);
     res.status(400).send("ada yang error");
   }
 };
