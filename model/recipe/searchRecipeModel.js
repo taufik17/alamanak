@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const db = require('../../db');
 
 // get all recipe
@@ -40,6 +41,42 @@ const getPopularRecipe = () => new Promise((resolve, reject) => {
     INNER JOIN categories ON categories.id_category = recipe.id_category
     GROUP BY recipe.id_recipe, categories.name_category 
     ORDER BY jumlah DESC`,
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
+// get popular recipe
+const getPopularRecipeAsc = () => new Promise((resolve, reject) => {
+  db.query(
+    `SELECT recipe.id_recipe, recipe.id_user, recipe.recipe_name, recipe.taste, recipe.recipe_image, categories.name_category, COUNT(like_recipe.id_recipe) AS jumlah FROM recipe
+    LEFT JOIN like_recipe ON recipe.id_recipe = like_recipe.id_recipe
+    INNER JOIN categories ON categories.id_category = recipe.id_category
+    GROUP BY recipe.id_recipe, categories.name_category 
+    ORDER BY recipe.recipe_name ASC`,
+    (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    },
+  );
+});
+
+// get popular recipe
+const getPopularRecipeDesc = () => new Promise((resolve, reject) => {
+  db.query(
+    `SELECT recipe.id_recipe, recipe.id_user, recipe.recipe_name, recipe.taste, recipe.recipe_image, categories.name_category, COUNT(like_recipe.id_recipe) AS jumlah FROM recipe
+    LEFT JOIN like_recipe ON recipe.id_recipe = like_recipe.id_recipe
+    INNER JOIN categories ON categories.id_category = recipe.id_category
+    GROUP BY recipe.id_recipe, categories.name_category 
+    ORDER BY recipe.recipe_name DESC`,
     (error, results) => {
       if (error) {
         reject(error);
@@ -250,4 +287,6 @@ module.exports = {
   getSavedByUser,
   getSearchByKeyword,
   getRecipeBycategory,
+  getPopularRecipeAsc,
+  getPopularRecipeDesc,
 };

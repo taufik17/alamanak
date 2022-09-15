@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const model = require('../../model/recipe/searchRecipeModel');
 
 const getAllRecipe = async (req, res) => {
@@ -21,6 +22,24 @@ const getAllCategory = async (req, res) => {
 const findRecipePopular = async (req, res) => {
   try {
     const getData = await model.getPopularRecipe();
+    res.send({ data: getData.rows, jumlahData: getData.rowCount });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findRecipePopularAsc = async (req, res) => {
+  try {
+    const getData = await model.getPopularRecipeAsc();
+    res.send({ data: getData.rows, jumlahData: getData.rowCount });
+  } catch (error) {
+    res.status(400).send('ada yang error');
+  }
+};
+
+const findRecipePopularDesc = async (req, res) => {
+  try {
+    const getData = await model.getPopularRecipeDesc();
     res.send({ data: getData.rows, jumlahData: getData.rowCount });
   } catch (error) {
     res.status(400).send('ada yang error');
@@ -248,4 +267,6 @@ module.exports = {
   getRecipeCategory,
   getRecipeById,
   getRecipeSearch,
+  findRecipePopularAsc,
+  findRecipePopularDesc,
 };

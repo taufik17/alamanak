@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 const Router = require('express').Router();
 const verifyToken = require('../../middleware/verifyToken');
 const controller = require('../../controllers/recipe/searchRecipeController');
@@ -13,6 +14,12 @@ Router.post('/recipe/find/category', controller.getRecipeCategory);
 
 // find recipe by popular
 Router.get('/recipe/find/popular', controller.findRecipePopular);
+
+// find recipe by popular
+Router.get('/recipe/find/popularasc', controller.findRecipePopularAsc);
+
+// find recipe by popular
+Router.get('/recipe/find/populardesc', controller.findRecipePopularDesc);
 
 // find like by
 Router.get('/recipe/find/like', controller.findRecipeLiked);
